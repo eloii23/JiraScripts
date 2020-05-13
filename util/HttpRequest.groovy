@@ -127,26 +127,5 @@ public class HttpRequest {
 
         return response
     }
-
-    public boolean delete(String url, String postContent, String user_token, Log oLog) { //TODO método por desenvolupar
-        oLog.escribir("Se ejecuta Integraciones.DELETE")
-        oLog.escribir("TOKEN: " + user_token)
-        oLog.escribir("URL: " + url)
-        oLog.escribir("JSON: " + postContent)
-        oLog.escribir("Finaliza POST")
-
-        return true
-    }
-
-    public JSONObject get(String url, String postContent, String user_token, Log oLog) {//TODO método por desenvolupar
-        JSONObject resultadoLlamada;
-        oLog.escribir("Se ejecuta Integraciones.GET")
-        oLog.escribir("TOKEN: " + user_token)
-        oLog.escribir("URL: " + url)
-        oLog.escribir("JSON: " + postContent)
-        oLog.escribir("Finaliza POST")
-
-        return resultadoLlamada
-    }
 }
 
