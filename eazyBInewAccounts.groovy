@@ -16,8 +16,7 @@ import javax.ws.rs.core.MediaType
 
 @BaseScript CustomEndpointDelegate delegate
 
-//final String URLEAZYBI = "http://localhost:8080/jiraito/plugins/servlet/eazybi/accounts/"
-final String URLEAZYBI = "https://stepspre.everis.com/jiraito/plugins/servlet/eazybi/"
+final String URLEAZYBI = "http://localhost:8080/plugins/servlet/eazybi/"
 
 @Field Log oLog = new Log("restEndPointEazyBIaccounts", "Clonar cubos JE2", "admin")
 @Field LectorProperties oLectorProperties = new LectorProperties("../restendpoint/ApiAutomatizacionJE2/properties/restEndPointAutomatizacionJe2.properties", oLog)
@@ -464,35 +463,5 @@ private HashMap defineUserRoles(String autentificacionEazyBI, String URLEAZYBI, 
         response.put("codigo", codigo)
         response.put("msn", msn)
         return response
-    }
-}
-
-cloneJE2ReportsAndDashboards(
-        httpMethod: "GET", groups: ["jira-administrators"]
-) { MultivaluedMap queryParams, String body ->
-    oLog.escribirInicio()
-    try {
-        String autentificacionEazyBI = oLectorProperties.getProperty("autentificacionEazyBI")
-        String urlGet = URLEAZYBI + "eazy/accounts/11/cube_report_definitions?cube_name=Issues"
-        HashMap conGetReport = HttpRequest.get(urlGet, autentificacionEazyBI, oLog)
-        String reportContent = conGetReport.content
-
-        oLog.escribir("Get Status: " + conGetReport.statusCode)
-        oLog.escribir("Get Message: " + conGetReport.message)
-        oLog.escribir("Get Content: " + reportContent)
-        oLog.escribir("Get Headers: " + conGetReport.headersGetted)
-        oLog.escribir("Get Cookies: " + conGetReport.responseCookies)
-
-        String urlPost = URLEAZYBI + "eazy/accounts/11/cube_report_definitions?cube_name=Issues&ignore_warnings=true"
-        HashMap conPostReport = HttpRequest.post(urlPost, reportContent, autentificacionEazyBI, HttpRequest.APP_JSON, oLog)
-
-        oLog.escribir("Post Status: " + conGetReport.statusCode)
-        oLog.escribir("Post Message: " + conGetReport.message)
-        oLog.escribir("Post Content: " + reportContent)
-        oLog.escribir("Post Headers: " + conGetReport.headersGetted)
-        oLog.escribir("Post Cookies: " + conGetReport.responseCookies)
-    } catch (Exception e) {
-        oLog.escribir("Error> Reports> " + e.getMessage())
-        oLog.escribir("Error> Reports> " + e.getStackTrace())
     }
 }
